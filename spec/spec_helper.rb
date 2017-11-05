@@ -5,17 +5,6 @@
 # javascript coverage is only just getting started, the ruby reporting is
 # disabled to make room for javascript coverage data.
 
-# require 'codeclimate-test-reporter'
-# CodeClimate::TestReporter.start
-require 'simplecov'
-require_relative 'simplecov_uncovered_formatter'
-
-SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
-  [SimpleCov::Formatter::HTMLFormatter, SimplecovUncoveredFormatter]
-)
-SimpleCov.start 'rails' do
-  add_filter 'lib/tasks' # even though we test these, coverage doesn't work right.
-end
 
 require 'vcr'
 require 'rspec/core' unless defined? RSpec.configure
@@ -137,4 +126,17 @@ VCR.configure do |c|
   c.ignore_hosts 'codeclimate.com'
   # for controller test
   c.ignore_localhost = true
+end
+
+# require 'codeclimate-test-reporter'
+# CodeClimate::TestReporter.start
+require 'deep_cover/builtin_takeover'
+require 'simplecov'
+require_relative 'simplecov_uncovered_formatter'
+
+SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
+  [SimpleCov::Formatter::HTMLFormatter, SimplecovUncoveredFormatter]
+)
+SimpleCov.start 'rails' do
+  add_filter 'lib/tasks' # even though we test these, coverage doesn't work right.
 end

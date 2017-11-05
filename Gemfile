@@ -112,6 +112,7 @@ group :test do
   gem 'database_cleaner'
   gem 'webmock'
   gem 'vcr'
+  gem 'deep-cover', git: 'https://github.com/deep-cover/deep-cover', branch: 'master'
   gem 'simplecov', require: false
   gem 'shoulda-matchers', '~> 3.1'
   gem 'rails-controller-testing'
